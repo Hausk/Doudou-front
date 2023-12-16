@@ -1,113 +1,119 @@
+'use client'
 import Image from 'next/image'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { SocialIcon } from 'react-social-icons'
+
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1
+  }
+};
+
+const paragraph = "Bonjour, je suis Victoria, une photographe passionnée par la création de souvenirs heureux et émotionnels à travers mes photos. Je suis là pour immortaliser vos moments spéciaux et les rendre encore plus mémorables."
+
+const sentence = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.008
+    }
+  }
+}
+const word = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0
+  }
+}
+
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <motion.main className="w-screen h-screen bg-gradient-to-tr from-slate-800 to-gray-800 relative overflow-hidden"
+      variants={container}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className="w-screen h-[60%]">
+        <div className="relative text-white z-0 h-[25%] left-0 font-bold text-9xl uppercase text-left w-screen">
+          <motion.h1 className="absolute z-20 left-0" variants={item}>Libre</motion.h1>
+        </div>
+        <div className="relative text-white h-[25%] font-bold text-9xl w-full uppercase text-right w-screen">
+          <motion.h1 className="absolute z-20 right-0" variants={item}>&amp;</motion.h1>
+        </div>
+        <div className="relative text-white h-[25%] font-bold text-9xl uppercase text-left">
+          <motion.h1 className="absolute z-20 left-0"variants={item}>Viv</motion.h1>
+        </div>
+        <div className="relative text-white h-[25%] font-bold text-9xl w-full uppercase text-right">
+          <motion.h1 className="absolute z-20 right-0" variants={item}>Ant</motion.h1>
+        </div>
+        <Image
+          className="z-10 rounded-[40%] h-auto mt-0 mb-auto w-screen absolute top-0"
+          src="/header.png"
+          alt="500"
+          width={320}
+          height={400}/>
+      </div>
+      <div className="text-white text-center flex word mt-5">
+              <motion.p className="w-[90%] mx-auto text-center paraph"
+                variants={sentence}
+                initial='hidden'
+                animate='visible'
+              >
+                {paragraph.split("").map((char, index) => {
+                  return (
+                    <motion.span
+                      key={char + '-' + index} variants={word}
+                    >
+                      {char}
+                    </motion.span>
+                  )
+                })}
+              </motion.p>
+      </div>
+      <div className="w-full flex z-50 my-6">
+        <motion.a className="m-auto bg-red-700 hover:bg-transparent border-red-500 border text-white font-bold rounded py-2 px-4 flex"
+          variants={item}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href="/works"
+        >Voir mon travail</motion.a>
+      </div>
+      <div className="z-50 social text-white text-2xl w-screen flex">
+        <div className="social m-auto w-[50%] flex justify-between">
+          <motion.a href="https://www.instagram.com/libre_vivant_photographie/?igshid=YmMyMTA2M2Y%3D" target="blank" variants={item}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          ><SocialIcon url="www.instagram.com" as="span"/></motion.a>
+          <motion.a href="https://www.tiktok.com/@libre_vivant" target="blank" variants={item}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}    
+          ><SocialIcon url="www.tiktok.com" as="span"/></motion.a>
+          <motion.a href="https://m.facebook.com/profile.php?id=100072519471892" target="blank" variants={item}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}   
+          ><SocialIcon url="www.facebook.com" as="span"/></motion.a>
         </div>
       </div>
+    </motion.main>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
   )
 }
