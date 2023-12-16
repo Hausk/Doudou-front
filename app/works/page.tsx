@@ -62,10 +62,12 @@ export default function Page() {
               <SwiperSlide key={index} className="relative">
                 <div className="w-screen h-screen" style={{background: "url('" + item.img + "') no-repeat", backgroundSize: 'cover'}}></div>
                 <div className="w-full h-full backdrop-blur absolute top-0">
-                        <img
+                        <Image
                         className="w-[80%] md:w-[40%] m-auto pt-5 rounded-[10px]"
                         src={item.img}
                         alt="slide"
+                        width={200}
+                        height={300}
                         />
                         <p className="text-sm text-center font-medium text-black">
                             {item.title}
